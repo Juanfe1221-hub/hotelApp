@@ -13,7 +13,7 @@ SELECT
     creado_en,
     actualizado_en
 FROM productos 
-WHERE sw_bodega = 1 
+WHERE sw_bodega = 2 
   AND estado = 1
   AND (inactivo IS NULL OR inactivo = 0)
 
@@ -21,7 +21,7 @@ UNION ALL
 
 SELECT 
     NULL AS id,
-    'TOTAL BODEGA 1' AS nombre,
+    'TOTAL BODEGA 2' AS nombre,
     SUM(CAST(cantidad AS UNSIGNED)) AS cantidad,
     'TOTAL' AS unidad,
     SUM(CAST(precio AS DECIMAL(15,2))) AS precio_compra,
@@ -34,7 +34,7 @@ SELECT
     NULL AS creado_en,
     NULL AS actualizado_en
 FROM productos 
-WHERE sw_bodega = 1 
+WHERE sw_bodega = 2 
   AND estado = 1 
   AND (inactivo IS NULL OR inactivo = 0)
 

@@ -19,34 +19,43 @@ if ($action) {
             exit;
         }
 
-        if ($action === 'reservas') {
-            $stmt = $pdo->query("
-                SELECT r.reserva_id AS id, h.nombre AS habitacion, r.huesped, r.fecha_inicio, r.fecha_fin, 
-                       r.camas, r.tipo_cliente, r.precio_total
-                FROM reservascreadas r
-                INNER JOIN habitaciones h ON h.habitacion_id = r.habitacion_id
-                WHERE r.sw_eliminado = 0
-                ORDER BY r.fecha_inicio ASC
-            ");
-            $reservas = [];
-            foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $r) {
-                $reservas[] = [
-                    'id' => $r['id'],
-                    'title' => "Habitación {$r['habitacion']} - {$r['huesped']} ({$r['camas']} cama" . ($r['camas']>1?'s':'') . ")",
-                    'start' => $r['fecha_inicio'],
-                    'end' => $r['fecha_fin'],
-                    'extendedProps' => [
-                        'habitacion' => $r['habitacion'],
-                        'huesped' => $r['huesped'],
-                        'camas' => $r['camas'],
-                        'tipo_cliente' => $r['tipo_cliente'],
-                        'precio_total' => $r['precio_total'],
-                    ]
-                ];
-            }
-            echo json_encode($reservas);
-            exit;
-        }
+       if ($action === 'reservas') {
+
+    // 🔹 ELIMINAR AUTOMÁTICAMENTE LAS RESERVAS VENCIDAS
+    $stmt = $pdo->prepare("UPDATE reservascreadas 
+                           SET sw_eliminado = 1 
+                           WHERE fecha_fin < CURDATE() 
+                           AND sw_eliminado = 0");
+    $stmt->execute();
+
+    // 🔹 Cargar las reservas vigentes
+    $stmt = $pdo->query("
+        SELECT r.reserva_id AS id, h.nombre AS habitacion, r.huesped, r.fecha_inicio, r.fecha_fin, 
+               r.camas, r.tipo_cliente, r.precio_total
+        FROM reservascreadas r
+        INNER JOIN habitaciones h ON h.habitacion_id = r.habitacion_id
+        WHERE r.sw_eliminado = 0
+        ORDER BY r.fecha_inicio ASC
+    ");
+    $reservas = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $r) {
+        $reservas[] = [
+            'id' => $r['id'],
+            'title' => "Habitación {$r['habitacion']} - {$r['huesped']} ({$r['camas']} cama" . ($r['camas']>1?'s':'') . ")",
+            'start' => $r['fecha_inicio'],
+            'end' => $r['fecha_fin'],
+            'extendedProps' => [
+                'habitacion' => $r['habitacion'],
+                'huesped' => $r['huesped'],
+                'camas' => $r['camas'],
+                'tipo_cliente' => $r['tipo_cliente'],
+                'precio_total' => $r['precio_total'],
+            ]
+        ];
+    }
+    echo json_encode($reservas);
+    exit;
+}
 
         if ($action === 'guardar') {
             $data = json_decode(file_get_contents('php://input'), true);

@@ -12,7 +12,7 @@ function calcularEstado($cantidad) {
 $action = $_GET['action'] ?? '';
 
 // La bodega que manejara este archivo
-$bodega = 1;
+$bodega = 2; 
 
 if ($action === 'list') {
     $stmt = $pdo->prepare("SELECT * FROM productos WHERE sw_bodega = :bodega ORDER BY creado_en DESC");
@@ -37,7 +37,7 @@ if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $estado = calcularEstado($_POST['cantidad']);
     $inactivo = isset($_POST['inactivo']) ? 1 : 0;
 
-    $stmt = $pdo->prepare("INSERT INTO productos (nombre, cantidad, unidad, precio, valor_venta, estado, inactivo, sw_bodega, creado_por)
+    $stmt = $pdo->prepare("INSERT INTO productos (nombre, cantidad, unidad, precio, valor_venta, estado, inactivo, sw_bodega, creado_por) 
                             VALUES (:nombre, :cantidad, :unidad, :precio, :valor_venta, :estado, :inactivo, :sw_bodega, 'admin')");
     $stmt->execute([
         ':nombre' => $_POST['nombre'],
@@ -57,8 +57,8 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $estado = calcularEstado($_POST['cantidad']);
     $inactivo = isset($_POST['inactivo']) ? 1 : 0;
 
-    $stmt = $pdo->prepare("UPDATE productos
-                            SET nombre=:nombre, cantidad=:cantidad, unidad=:unidad, precio=:precio, valor_venta=:valor_venta, estado=:estado, inactivo=:inactivo, actualizado_por='admin'
+    $stmt = $pdo->prepare("UPDATE productos 
+                            SET nombre=:nombre, cantidad=:cantidad, unidad=:unidad, precio=:precio, valor_venta=:valor_venta, estado=:estado, inactivo=:inactivo, actualizado_por='admin' 
                             WHERE id=:id AND sw_bodega = :sw_bodega");
     $stmt->execute([
         ':id' => $_POST['id'],
@@ -97,7 +97,7 @@ if ($action === 'delete' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Inventario de Productos - Bodega 1</title>
+<title>Inventario de Productos - Bodega 2</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../icons/css/all.min.css" rel="stylesheet">
@@ -123,7 +123,7 @@ body { background:#f8f9fa; }
 
 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-4">
   <div class="d-flex align-items-center gap-3">
-    <h3 class="m-0"><i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Inventario Bodega 1</h3>
+    <h3 class="m-0"><i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Inventario Bodega 2</h3>
     <div class="d-none d-sm-block text-muted"><?php echo htmlspecialchars($rolUsuario); ?></div>
   </div>
 
@@ -232,7 +232,7 @@ function renderProductos() {
   const q = currentSearch.trim().toLowerCase();
   productosDiv.innerHTML = '';
   const filtrados = productos.filter(p => {
-    const matchFilter = (currentFilter === 'all') ||
+    const matchFilter = (currentFilter === 'all') || 
                         (currentFilter === 'inactivo' ? p.inactivo == 1 : p.estado === currentFilter);
     const matchSearch = !q || p.nombre.toLowerCase().includes(q);
     return matchFilter && matchSearch;
@@ -257,9 +257,9 @@ function renderProductos() {
         <p class="mb-1"><i class="fa-solid fa-tags me-2 text-secondary"></i> Valor Venta: <strong>$${nf.format(Number(p.valor_venta ?? 0))}</strong></p>
         <div class="d-flex justify-content-end gap-2 mt-3">
           ${esAdmin ? `
-          <button class="btn btn-sm btn-outline-primary edit-btn"
-                  data-id="${esc(p.id)}" data-nombre="${esc(p.nombre)}" data-cantidad="${esc(p.cantidad)}"
-                  data-unidad="${esc(p.unidad)}" data-precio="${esc(p.precio)}"
+          <button class="btn btn-sm btn-outline-primary edit-btn" 
+                  data-id="${esc(p.id)}" data-nombre="${esc(p.nombre)}" data-cantidad="${esc(p.cantidad)}" 
+                  data-unidad="${esc(p.unidad)}" data-precio="${esc(p.precio)}" 
                   data-valor_venta="${esc(p.valor_venta)}"
                   data-inactivo="${p.inactivo}">
             <i class="fa-solid fa-pen"></i>
