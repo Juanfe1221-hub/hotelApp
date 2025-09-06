@@ -1,0 +1,46 @@
+
+CREATE DATABASE hotel_florencia
+
+
+CREATE TABLE usuarios (
+    usuario_id SERIAL PRIMARY KEY,       
+    nombres VARCHAR(100) NOT NULL,     
+    rol VARCHAR(50) NOT NULL,            
+    usuario_crea VARCHAR(50) NOT NULL,   
+    password VARCHAR(255) NOT NULL, 
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+
+
+CREATE TABLE habitaciones (
+    habitacion_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    tipo ENUM('Estándar','Suite','Familiar') NOT NULL DEFAULT 'Estándar',
+    camas TINYINT NOT NULL DEFAULT 1,
+    precio DECIMAL(10,2) NOT NULL DEFAULT 0,
+    estado ENUM('Disponible','Ocupada','Mantenimiento') NOT NULL DEFAULT 'Disponible',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE reservas (
+    reserva_id INT AUTO_INCREMENT PRIMARY KEY,
+    habitacion_id INT NOT NULL,
+    huesped VARCHAR(150) NOT NULL,
+    camas TINYINT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    estado ENUM('Pendiente','Confirmada','Cancelada') DEFAULT 'Pendiente',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_crea VARCHAR(50),
+    FOREIGN KEY (habitacion_id) REFERENCES habitaciones(habitacion_id) ON DELETE CASCADE
+);
+
+CREATE TABLE parqueadero (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(20) NOT NULL,
+    entry_time DATETIME NOT NULL,
+    exit_time DATETIME DEFAULT NULL,
+    duration_hours DECIMAL(5,2) DEFAULT NULL,
+    is_stadia BOOLEAN NOT NULL DEFAULT FALSE,
+    charge DECIMAL(10,2) DEFAULT NULL
+);

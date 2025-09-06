@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f4f8; /* Antes: #fff */
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #f1f5f9;
+  color: black;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo img {
+  height: 60px;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.acciones i {
+  color: #2c3e50;
+  font-size: 20px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.acciones i:hover {
+  transform: scale(1.2);
+}
+
+.version {
+  font-size: 12px;
+  color: #2ecc71;
+  margin-left: 5px;
+}
+
+/* TARJETAS CENTRADAS */
+main {
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 150px;
+}
+
+.card {
+  background: #ffffff;
+  border: 2px solid #2ecc71;
+  border-radius: 15px;
+  width: 250px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.card:nth-child(2) {
+  border-color: #3498db;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background-color: #e9fdf3;
+}
+
+.card h2 {
+  color: #2ecc71;
+  margin: 15px 0;
+}
+
+.card a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.card a::before {
+  content: '>';
+  margin-right: 6px;
+  color: #2ecc71;
+}
+
+.titulo {
+  text-align: center;
+  margin: 80px 0 20px 0;
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.user-panel {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.user-panel.show {
+  left: 0;
+}
+
+.user-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.user-panel-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.user-panel-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.user-panel-body p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+
+/* VISTA NEIVA  */
+
+.servicios-bg {
+  background: linear-gradient(to bottom, #e9fdf3, #f1f5f9);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.servicios-container {
+  max-width: 1000px;
+  padding: 40px;
+}
+
+.titulo-servicios {
+  color: #2c3e50;
+  font-size: 36px;
+  margin-bottom: 50px;
+}
+
+.servicio-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 40px 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.servicio-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+}
+
+.servicio-card i {
+  font-size: 50px;
+  margin-bottom: 20px;
+  color: #22a163;
+}
+
+.servicio-card h2 {
+  font-size: 24px;
+  color: #2c3e50;
+}
+
+/* header */
+/* Fijar el header en la parte superior */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+ .btn-volver-inicio { 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      border-radius: 50px; 
+      padding: 0.75rem 1.5rem; 
+      font-size: 1rem; 
+      z-index: 1050;
+  }
+
+/* Asegurar espacio para el header */
+body {
+  padding-top: 80px;
+}
