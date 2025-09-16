@@ -57,7 +57,7 @@ if ($action === 'despachar' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             ':sw_bodega'        => $bodega_origen // Guarda la bodega de donde se despachó
         ]);
 
-        echo json_encode(['success' => true, 'message' => 'Producto despachado con éxito desde la Bodega ' . $bodega_origen]);
+        echo json_encode(['success' => true, 'message' => 'Producto despachado con éxito desde la Cafeteria ' . $bodega_origen]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
@@ -175,13 +175,13 @@ if ($action === 'getProductos' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     <form id="formDespacho">
      <div class="row g-3">
       <div class="col-12 text-center mb-3">
-        <label class="form-label fw-bold">Selecciona la Bodega de Origen</label>
+        <label class="form-label fw-bold">Selecciona la Cafeteria</label>
         <div class="d-flex justify-content-center gap-3 mt-2">
             <button type="button" class="btn bodega-icon-btn active" data-bodega-id="1">
-                <i class="fa-solid fa-warehouse fa-2x d-block mb-1"></i> Bodega 1
+                <i class="fa-solid fa-warehouse fa-2x d-block mb-1"></i> Cafeteria 1
             </button>
             <button type="button" class="btn bodega-icon-btn" data-bodega-id="2">
-                <i class="fa-solid fa-warehouse fa-2x d-block mb-1"></i> Bodega 2
+                <i class="fa-solid fa-warehouse fa-2x d-block mb-1"></i> Cafeteria 2
             </button>
         </div>
         <input type="hidden" id="bodega_origen" name="bodega_origen" value="1">
@@ -307,7 +307,7 @@ function despacharInsumo() {
                 icon: "success",
                 title: "Éxito",
                 text: r.message,
-                timer: 1200,
+                timer: 1500,
                 showConfirmButton: false
             }).then(() => {
                 const modal = bootstrap.Modal.getInstance(modalEl);

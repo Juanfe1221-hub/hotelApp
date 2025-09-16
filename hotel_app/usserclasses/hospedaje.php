@@ -57,7 +57,7 @@
      .titulo-modernizado h1 {
     font-size: 2.4rem;
     font-weight: 700;
-    color: #007bff; /* mismo color que los íconos */
+    color: #007bff; 
     margin-bottom: 2rem;
     display: inline-block;
 }

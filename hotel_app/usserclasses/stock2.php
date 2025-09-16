@@ -11,7 +11,7 @@ function calcularEstado($cantidad) {
 
 $action = $_GET['action'] ?? '';
 
-// La bodega que manejara este archivo
+
 $bodega = 2; 
 
 if ($action === 'list') {
@@ -97,7 +97,7 @@ if ($action === 'delete' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Inventario de Productos - Bodega 2</title>
+<title>Inventario de Productos - Cafeteria 2 </title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../icons/css/all.min.css" rel="stylesheet">
@@ -123,7 +123,7 @@ body { background:#f8f9fa; }
 
 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-4">
   <div class="d-flex align-items-center gap-3">
-    <h3 class="m-0"><i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Inventario Bodega 2</h3>
+    <h3 class="m-0"><i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Inventario Cafeteria 2 </h3>
     <div class="d-none d-sm-block text-muted"><?php echo htmlspecialchars($rolUsuario); ?></div>
   </div>
 
